@@ -1,6 +1,6 @@
-const nodeMailer = require("nodemailer");
-const path = require("path");
-const ejs = require("ejs");
+import nodeMailer from "nodemailer";
+import path from "path";
+import ejs from "ejs";
 
 let mailTransporter = nodeMailer.createTransport({
   service: "gmail",
@@ -10,7 +10,7 @@ let mailTransporter = nodeMailer.createTransport({
   },
 });
 
-const sendMail = async (email, url) => {
+export const sendMail = async (email: string, url: string) => {
   const templatePath = path.join(__dirname, "../Views/ConfirmEmail.ejs");
 
   const data = await ejs.renderFile(templatePath, {
@@ -29,5 +29,3 @@ const sendMail = async (email, url) => {
     console.log(error);
   }
 };
-
-module.exports = sendMail;
